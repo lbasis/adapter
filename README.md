@@ -1,0 +1,2 @@
+# adapter
+基于IAdapter接口对android组件listview的baseadapter和Recyclerview的RecycleAdapter的封装和实现。
