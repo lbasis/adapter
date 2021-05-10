@@ -15,7 +15,7 @@ import com.bcq.adapter.recycle.RcyAdapter;
 
 import java.util.List;
 
-public abstract class RefreshAdapter<T, VH extends IHolder> implements IAdapte<T, VH> {
+public abstract class RefreshAdapter<T, VH extends IHolder> implements IAdapte<T, VH>, DataObserver {
     protected final Context context;
     private IAdapte adapter;
     private int[] layoutIds;
@@ -34,6 +34,8 @@ public abstract class RefreshAdapter<T, VH extends IHolder> implements IAdapte<T
         } else {
             throw new IllegalArgumentException("No Support View Type :" + refreshView.getClass().getSimpleName());
         }
+        // 默认设置 可以覆盖
+        adapter.setDataObserver(this);
     }
 
     public BaseAdapter lvAdapter() {
@@ -86,6 +88,10 @@ public abstract class RefreshAdapter<T, VH extends IHolder> implements IAdapte<T
     public boolean removeItem(T item) {
         if (null != adapter) return adapter.removeItem(item);
         return false;
+    }
+
+    @Override
+    public void onObserve(int length) {
     }
 
     @Override
