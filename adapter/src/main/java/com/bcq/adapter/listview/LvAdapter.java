@@ -22,7 +22,7 @@ import java.util.List;
  * @className: RefreshAdapter
  * @Description: 通用适配器:支持多类型viewType
  */
-public abstract class LvAdapter<T,VH extends IHolder> extends BaseAdapter implements IAdapte<T, VH> {
+public abstract class LvAdapter<T, VH extends IHolder> extends BaseAdapter implements IAdapte<T, VH> {
     protected Context mContext;
     private List<T> data;
     private LayoutInflater inflater;
@@ -61,11 +61,13 @@ public abstract class LvAdapter<T,VH extends IHolder> extends BaseAdapter implem
         if (refresh) {
             data.clear();
         }
-        data.addAll(list);
+        if (null != list) {
+            data.addAll(list);
+            notifyDataSetChanged();
+        }
         if (null != observer) {
             observer.onObserve(data.size());
         }
-        notifyDataSetChanged();
     }
 
     public void clear() {

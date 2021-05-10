@@ -58,17 +58,17 @@ public abstract class RcyAdapter<T, VH extends IHolder> extends RecyclerView.Ada
 
     @Override
     public synchronized void setData(List<T> list, boolean refresh) {
-        int len = null == list ? 0 : list.size();
-        if (len == 0) return;
+        if (null != list) {
+            if (refresh) {
+                data.clear();
+                data.addAll(list);
+                notifyDataSetChanged();
+            } else {
+                data.addAll(list);
+            }
+        }
         if (null != observer) {
             observer.onObserve(data.size());
-        }
-        if (refresh) {
-            data.clear();
-            data.addAll(list);
-            notifyDataSetChanged();
-        } else {
-            data.addAll(list);
         }
     }
 
