@@ -58,18 +58,21 @@ public abstract class RcyAdapter<T, VH extends IHolder> extends RecyclerView.Ada
 
     @Override
     public synchronized void setData(List<T> list, boolean refresh) {
+        if (refresh) {
+            data.clear();
+        }
         if (null != list) {
-            if (refresh) {
-                data.clear();
-                data.addAll(list);
-                notifyDataSetChanged();
-            } else {
-                data.addAll(list);
-            }
+            data.addAll(list);
+            notifyDataSetChanged();
         }
         if (null != observer) {
             observer.onObserve(data.size());
         }
+    }
+
+    @Override
+    public List<T> getData() {
+        return null == data ? new ArrayList<>() : new ArrayList<>(data);
     }
 
     @Override
@@ -107,15 +110,15 @@ public abstract class RcyAdapter<T, VH extends IHolder> extends RecyclerView.Ada
     }
 
     @Override
-    public void onViewRecycled( RecyclerView.ViewHolder holder) {
-        Log.e("RcyAdapter","onViewRecycled");
+    public void onViewRecycled(RecyclerView.ViewHolder holder) {
+        Log.e("RcyAdapter", "onViewRecycled");
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         T dt = getItem(position);
         int layout = getItemLayoutId(dt, position);
-        convert((VH)holder, dt, position, layout);
+        convert((VH) holder, dt, position, layout);
     }
 
     /************************以上RecyclerView.Adapter的方法*********************/

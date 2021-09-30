@@ -70,6 +70,11 @@ public abstract class LvAdapter<T, VH extends IHolder> extends BaseAdapter imple
         }
     }
 
+    @Override
+    public List<T> getData() {
+        return null == data ? new ArrayList<>() : new ArrayList<>(data);
+    }
+
     public void clear() {
         if (null != data) data.clear();
     }

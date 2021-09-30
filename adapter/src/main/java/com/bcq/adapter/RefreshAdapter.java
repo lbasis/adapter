@@ -13,6 +13,7 @@ import com.bcq.adapter.interfaces.IHolder;
 import com.bcq.adapter.listview.LvAdapter;
 import com.bcq.adapter.recycle.RcyAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class RefreshAdapter<T, VH extends IHolder> implements IAdapte<T, VH>, DataObserver {
@@ -76,6 +77,12 @@ public abstract class RefreshAdapter<T, VH extends IHolder> implements IAdapte<T
     @Override
     public void setData(List<T> list, boolean refresh) {
         if (null != adapter) adapter.setData(list, refresh);
+    }
+
+    @Override
+    public List<T> getData() {
+        if (null != adapter) adapter.getData();
+        return new ArrayList<>();
     }
 
     @Override

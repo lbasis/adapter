@@ -15,6 +15,10 @@ import java.util.List;
  */
 public interface IAdapte<T, VH extends IHolder> {
 
+    /**
+     * @param refreshView 列表展示
+     * @param <V>
+     */
     <V extends View> void setRefreshView(V refreshView);
 
     void setDataObserver(DataObserver observer);
@@ -27,6 +31,13 @@ public interface IAdapte<T, VH extends IHolder> {
      */
     void setData(List<T> list, boolean refresh);
 
+
+    /**
+     * 获取数据
+     *
+     * @return data
+     */
+    List<T> getData();
 
     /**
      * 获取指定索引的数据对象
