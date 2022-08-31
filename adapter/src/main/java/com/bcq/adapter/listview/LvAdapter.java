@@ -101,6 +101,15 @@ public abstract class LvAdapter<T, VH extends IHolder> extends BaseAdapter imple
     }
 
     @Override
+    public void updateItem(int position, T t) {
+        int count = getCount();
+        if (position < 0 || count == 0 || position >= count) {
+            return;
+        }
+        data.set(position, t);
+    }
+
+    @Override
     public long getItemId(int position) {
         return position;
     }

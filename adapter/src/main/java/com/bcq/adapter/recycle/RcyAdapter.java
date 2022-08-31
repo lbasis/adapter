@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.UiThread;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bcq.adapter.interfaces.DataObserver;
@@ -83,6 +83,15 @@ public abstract class RcyAdapter<T, VH extends IHolder> extends RecyclerView.Ada
             observer.onObserve(data.size());
         }
         return flag;
+    }
+
+    @Override
+    public void updateItem(int position, T t) {
+        int count = getItemCount();
+        if (position < 0 || count == 0 || position >= count) {
+            return;
+        }
+        data.set(position, t);
     }
 
     @Override

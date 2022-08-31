@@ -3,6 +3,7 @@ package com.bcq.adapter.interfaces;
 import android.view.View;
 import android.widget.ListView;
 
+import androidx.annotation.UiThread;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -54,6 +55,8 @@ public interface IAdapte<T, VH extends IHolder> {
      * @return
      */
     boolean removeItem(T item);
+
+    void updateItem(int position, T t);
 
     /**
      * 根据position 和 数据 获取itemView的布局id
